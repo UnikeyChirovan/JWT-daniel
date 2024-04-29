@@ -18,9 +18,9 @@ const authController = {
       });
 
       const user = await newUser.save();
-      res.status(200).json(user);
+      return res.status(200).json(user);
     } catch (err) {
-      res.status(500).json({ error: "Could not register user" });
+      return res.status(500).json({ error: "Could not register user" });
     }
   },
 
@@ -73,9 +73,9 @@ const authController = {
       });
 
       const { password, ...userData } = user._doc;
-      res.status(200).json({ user: userData, accessToken, refreshToken });
+      return res.status(200).json({ user: userData, accessToken, refreshToken });
     } catch (err) {
-      res.status(500).json({ error: "Server error" });
+      return res.status(500).json({ error: "Server error" });
     }
   },
 
@@ -107,7 +107,7 @@ const authController = {
         sameSite: "strict",
       });
 
-      res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+      return res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
     });
   },
 
@@ -115,7 +115,7 @@ const authController = {
   logOut: async (req, res) => {
     refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
     res.clearCookie("refreshToken");
-    res.status(200).json({ message: "Logged out successfully" });
+    return res.status(200).json({ message: "Logged out successfully" });
   },
 };
 
