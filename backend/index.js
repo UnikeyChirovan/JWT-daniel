@@ -20,8 +20,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 //ROUTES
-app.use("/v1/auth", authRoute);
-app.use("/v1/user", userRoute);
+app.use("/v1/auth", authRoute);//(post)
+app.use("/v1/user", userRoute);//(get)
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
